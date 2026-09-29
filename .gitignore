@@ -1,0 +1,9 @@
+# CIHUY Birthday Website — .gitignore
+.git/
+*.log
+*.DS_Store
+Thumbs.db
+/assets/foto/*.jpg
+/assets/foto/*.png
+/assets/foto/*.jpeg
+/assets/foto/*.webp
