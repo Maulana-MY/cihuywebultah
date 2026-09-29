@@ -1,0 +1,572 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Jasa Website Ucapan Ulang Tahun Interaktif — Glassmorphism, Animasi, Musik & Tiup Lilin! Pesan via WhatsApp." />
+  <title>🎂 Jasa Website Ulang Tahun Interaktif</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --pink:    #e91e8c;
+      --pinkl:   #ff6bc2;
+      --blue:    #00e5ff;
+      --purple:  #7b1fa2;
+      --dark:    #08001a;
+      --glass:   rgba(255,255,255,0.07);
+      --border:  rgba(255,255,255,0.15);
+      --wa:      #25D366;
+      --wal:     #2ef87a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Outfit", sans-serif;
+      background: var(--dark);
+      color: #f0e6ff;
+      overflow-x: hidden;
+    }
+
+    /* ── BG canvas ── */
+    #bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 28px;
+      background: rgba(8,0,26,0.7);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: "Dancing Script", cursive;
+      font-size: 1.6rem;
+      background: linear-gradient(90deg, var(--pink), var(--blue));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .nav-wa {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 18px; border-radius: 50px; border: none;
+      background: var(--wa); color: #fff; font-family: "Outfit", sans-serif;
+      font-size: 0.9rem; font-weight: 700; cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .nav-wa:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
+
+    /* ── SECTIONS ── */
+    section { position: relative; z-index: 1; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100dvh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 100px 20px 60px;
+    }
+    .hero-badge {
+      display: inline-block; padding: 6px 18px; border-radius: 50px;
+      background: rgba(233,30,140,0.15); border: 1px solid rgba(233,30,140,0.4);
+      font-size: 0.85rem; font-weight: 600; color: var(--pinkl);
+      margin-bottom: 20px; letter-spacing: 0.05em;
+      animation: badgePulse 2s ease-in-out infinite;
+    }
+    @keyframes badgePulse { 0%,100%{opacity:.8} 50%{opacity:1} }
+
+    .hero-title {
+      font-family: "Dancing Script", cursive;
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      line-height: 1.15;
+      background: linear-gradient(135deg, var(--pinkl) 0%, #fff 40%, var(--blue) 100%);
+      background-size: 200%;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: gradMove 5s linear infinite;
+      margin-bottom: 18px;
+    }
+    @keyframes gradMove { 0%{background-position:0%} 100%{background-position:200%} }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: rgba(240,230,255,0.75);
+      max-width: 560px; line-height: 1.7; margin-bottom: 40px;
+    }
+
+    .cta-group { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+    .btn-wa-main {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 36px; border-radius: 50px; border: none;
+      background: linear-gradient(135deg, var(--wa), #128C7E);
+      color: #fff; font-family: "Outfit", sans-serif;
+      font-size: 1.1rem; font-weight: 800;
+      cursor: pointer; text-decoration: none;
+      box-shadow: 0 6px 32px rgba(37,211,102,0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: waPulse 2.5s ease-in-out infinite;
+    }
+    .btn-wa-main:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 12px 44px rgba(37,211,102,0.7); }
+    @keyframes waPulse {
+      0%,100%{ box-shadow: 0 6px 32px rgba(37,211,102,0.5); }
+      50%    { box-shadow: 0 6px 48px rgba(37,211,102,0.85), 0 0 24px rgba(37,211,102,0.3); }
+    }
+
+    .btn-preview {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 32px; border-radius: 50px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid var(--border);
+      color: #f0e6ff; font-family: "Outfit", sans-serif;
+      font-size: 1rem; font-weight: 600; cursor: pointer; text-decoration: none;
+      backdrop-filter: blur(12px);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .btn-preview:hover { background: rgba(255,255,255,0.13); transform: translateY(-3px); }
+
+    /* WA number display */
+    .wa-number-tag {
+      margin-top: 22px;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(37,211,102,0.1); border: 1px solid rgba(37,211,102,0.3);
+      border-radius: 50px; padding: 8px 20px;
+      font-size: 1rem; font-weight: 700; color: var(--wal);
+      letter-spacing: 0.06em;
+    }
+    .wa-number-tag span { font-size: 1.2rem; }
+
+    /* ── FLOATING EMOJIS ── */
+    .floaters { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .fl { position: absolute; font-size: 2rem; animation: floatUp linear infinite; opacity: 0.6; }
+    @keyframes floatUp {
+      0%   { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.6; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ── FEATURES ── */
+    #features {
+      padding: 80px 20px;
+      display: flex; flex-direction: column; align-items: center; gap: 48px;
+    }
+    .section-label {
+      text-align: center;
+    }
+    .section-label h2 {
+      font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 900;
+      background: linear-gradient(90deg, var(--pinkl), var(--blue));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 10px;
+    }
+    .section-label p { color: rgba(240,230,255,0.6); font-size: 1rem; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      max-width: 900px; width: 100%;
+    }
+    .feat-card {
+      background: var(--glass);
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 22px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+    .feat-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(233,30,140,0.25), 0 4px 16px rgba(0,229,255,0.1);
+    }
+    .feat-icon { font-size: 2.4rem; margin-bottom: 14px; display: block; }
+    .feat-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
+    .feat-desc  { font-size: 0.9rem; color: rgba(240,230,255,0.65); line-height: 1.6; }
+
+    /* ── PRICING ── */
+    #pricing {
+      padding: 80px 20px;
+      display: flex; flex-direction: column; align-items: center; gap: 40px;
+    }
+    .price-cards {
+      display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
+      max-width: 900px; width: 100%;
+    }
+    .price-card {
+      flex: 1; min-width: 240px; max-width: 280px;
+      background: var(--glass);
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px 24px;
+      text-align: center;
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .price-card:hover { transform: translateY(-8px); }
+    .price-card.hot {
+      border-color: var(--pink);
+      box-shadow: 0 0 40px rgba(233,30,140,0.3), inset 0 0 30px rgba(233,30,140,0.05);
+    }
+    .hot-badge {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(90deg, var(--pink), var(--purple));
+      color: #fff; font-size: 0.78rem; font-weight: 700;
+      padding: 5px 18px; border-radius: 50px; white-space: nowrap;
+    }
+    .price-tier { font-size: 1rem; font-weight: 600; color: rgba(240,230,255,0.7); margin-bottom: 10px; }
+    .price-num  {
+      font-size: 2.2rem; font-weight: 900;
+      background: linear-gradient(90deg, var(--pinkl), var(--blue));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 18px;
+    }
+    .price-num span { font-size: 1rem; font-weight: 400; color: rgba(240,230,255,0.5); }
+    .price-list { list-style: none; text-align: left; margin-bottom: 24px; display: flex; flex-direction: column; gap: 8px; }
+    .price-list li { font-size: 0.88rem; color: rgba(240,230,255,0.75); }
+    .price-list li::before { content: "✅ "; }
+    .btn-order {
+      width: 100%; padding: 13px; border-radius: 50px; border: none;
+      background: linear-gradient(135deg, var(--wa), #128C7E);
+      color: #fff; font-family: "Outfit", sans-serif;
+      font-weight: 700; font-size: 0.95rem; cursor: pointer;
+      text-decoration: none; display: block;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-order:hover { transform: scale(1.04); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
+
+    /* ── HOW IT WORKS ── */
+    #how {
+      padding: 80px 20px;
+      display: flex; flex-direction: column; align-items: center; gap: 48px;
+    }
+    .steps {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 24px;
+      max-width: 860px;
+    }
+    .step {
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      width: 180px; text-align: center;
+    }
+    .step-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; font-weight: 900; color: #fff;
+      box-shadow: 0 4px 20px rgba(233,30,140,0.45);
+    }
+    .step-txt { font-size: 0.9rem; color: rgba(240,230,255,0.75); line-height: 1.5; }
+    .step-title { font-weight: 700; color: #fff; font-size: 1rem; }
+
+    /* ── CTA BOTTOM ── */
+    #cta-bottom {
+      padding: 80px 20px;
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 24px;
+    }
+    #cta-bottom h2 {
+      font-family: "Dancing Script", cursive;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      background: linear-gradient(90deg, var(--pinkl), var(--blue));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    #cta-bottom p { color: rgba(240,230,255,0.65); max-width: 480px; font-size: 1rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 24px 20px;
+      border-top: 1px solid var(--border);
+      color: rgba(240,230,255,0.35); font-size: 0.8rem; position: relative; z-index: 1;
+    }
+
+    /* ── WA FLOAT BUTTON ── */
+    .wa-float {
+      position: fixed; bottom: 24px; right: 24px; z-index: 200;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: var(--wa); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 6px 28px rgba(37,211,102,0.6);
+      animation: waBounce 2s ease-in-out infinite;
+      text-decoration: none;
+    }
+    @keyframes waBounce {
+      0%,100%{ transform: translateY(0); }
+      50%    { transform: translateY(-6px); }
+    }
+
+    /* ── Divider ── */
+    .divider {
+      width: 80px; height: 3px; border-radius: 2px;
+      background: linear-gradient(90deg, var(--pink), var(--blue));
+      margin: 0 auto 0;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:480px){
+      .cta-group { flex-direction: column; align-items: center; }
+      .btn-wa-main, .btn-preview { width: 100%; max-width: 320px; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-logo">🎂 CIHUY Web</div>
+  <a href="https://wa.me/6285282012758?text=Halo%20kak%2C%20saya%20mau%20pesan%20website%20ucapan%20ulang%20tahun%20interaktif!%20🎉"
+     target="_blank" class="nav-wa">
+    <span>📱</span> 085282012758
+  </a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="floaters" id="floaters"></div>
+
+  <div class="hero-badge">✨ Jasa Website Ulang Tahun Interaktif</div>
+
+  <h1 class="hero-title">Hadiahkan<br/>Momen Tak Terlupakan</h1>
+
+  <p class="hero-sub">
+    Website ucapan ulang tahun yang keren banget — animasi gift box, kartu glassmorphism,
+    musik otomatis, kue virtual, dan fitur <strong>tiup lilin pakai mic</strong>! 🎤🎂
+  </p>
+
+  <div class="cta-group">
+    <a href="https://wa.me/6285282012758?text=Halo%20kak!%20Saya%20mau%20pesan%20website%20ucapan%20ulang%20tahun%20interaktif%20dong!%20🎉%0ANama%20penerima%3A%20"
+       target="_blank" class="btn-wa-main">
+      <span>💬</span> Pesan Sekarang via WA
+    </a>
+    <a href="../index.html" target="_blank" class="btn-preview">
+      <span>👀</span> Lihat Demo
+    </a>
+  </div>
+
+  <div class="wa-number-tag">
+    <span>📞</span> 085282012758
+  </div>
+</section>
+
+<!-- ═══ FEATURES ═══ -->
+<section id="features">
+  <div class="section-label">
+    <h2>🚀 Fitur Lengkap</h2>
+    <p>Semua yang bikin website ulang tahun kamu beda dari yang lain</p>
+    <div class="divider" style="margin-top:12px;"></div>
+  </div>
+  <div class="features-grid">
+    <div class="feat-card">
+      <span class="feat-icon">🎁</span>
+      <div class="feat-title">Gift Box Animasi</div>
+      <div class="feat-desc">Animasi kotak hadiah interaktif yang bikin si penerima excited dari pertama buka website!</div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">💎</span>
+      <div class="feat-title">Glassmorphism UI</div>
+      <div class="feat-desc">Desain modern frosted glass dengan warna Pink neon + Electric Blue yang super premium.</div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">🎊</span>
+      <div class="feat-title">Confetti Explosion</div>
+      <div class="feat-desc">Efek confetti kembang api meledak saat kotak hadiah dibuka — bikin WOW!</div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">🎵</span>
+      <div class="feat-title">Musik Otomatis</div>
+      <div class="feat-desc">Lagu ulang tahun langsung play otomatis setelah interaksi pertama. Bisa toggle kapan saja.</div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">🎤</span>
+      <div class="feat-title">Tiup Lilin via Mic</div>
+      <div class="feat-desc">Fitur canggih! Tiup ke microphone HP/laptop → lilin padam → confetti meledak lagi! 🔥</div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">📸</span>
+      <div class="feat-title">2 Slot Foto</div>
+      <div class="feat-desc">Tambahkan 2 foto kenangan spesial langsung di kartu ucapan. Bisa upload dari HP!</div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">📱</span>
+      <div class="feat-title">Mobile Friendly</div>
+      <div class="feat-desc">Tampil sempurna di HP, tablet, maupun laptop. Responsive 100%.</div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">✨</span>
+      <div class="feat-title">Partikel Animasi</div>
+      <div class="feat-desc">Background hidup dengan 120 partikel terbang warna-warni. Berasa magical!</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section id="how">
+  <div class="section-label">
+    <h2>📋 Cara Pesan</h2>
+    <p>Cepat, mudah, dan langsung jadi!</p>
+    <div class="divider" style="margin-top:12px;"></div>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Chat WA</div>
+      <div class="step-txt">Klik tombol pesan, langsung terhubung ke WhatsApp kami</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">Kirim Data</div>
+      <div class="step-txt">Nama penerima, foto (opsional), pesan, & musik pilihan</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Proses</div>
+      <div class="step-txt">Website dibuatkan dalam waktu singkat ⚡</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-title">Terima Link</div>
+      <div class="step-txt">Dapat link website, langsung share ke orang tersayang! 🎉</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section id="pricing">
+  <div class="section-label">
+    <h2>💰 Harga Paket</h2>
+    <p>Terjangkau, berkualitas premium</p>
+    <div class="divider" style="margin-top:12px;"></div>
+  </div>
+  <div class="price-cards">
+
+    <div class="price-card">
+      <div class="price-tier">🌸 Basic</div>
+      <div class="price-num">Gratis <span>/demo</span></div>
+      <ul class="price-list">
+        <li>Gift box animasi</li>
+        <li>Kartu glassmorphism</li>
+        <li>Confetti effect</li>
+        <li>Tiup lilin mic</li>
+        <li>Nama custom</li>
+      </ul>
+      <a href="https://wa.me/6285282012758?text=Halo%20kak!%20Saya%20mau%20tanya%20soal%20paket%20Basic%20website%20ulang%20tahun%20🎂"
+         target="_blank" class="btn-order">💬 Tanya Dulu</a>
+    </div>
+
+    <div class="price-card hot">
+      <div class="hot-badge">⭐ PALING LARIS</div>
+      <div class="price-tier">💎 Premium</div>
+      <div class="price-num">Custom <span>/negosiasi</span></div>
+      <ul class="price-list">
+        <li>Semua fitur Basic</li>
+        <li>2 foto kenangan</li>
+        <li>Musik custom pilihan</li>
+        <li>Pesan custom</li>
+        <li>Link eksklusif</li>
+        <li>Revisi 1x</li>
+      </ul>
+      <a href="https://wa.me/6285282012758?text=Halo%20kak!%20Saya%20mau%20pesan%20paket%20Premium%20website%20ulang%20tahun!%20🎉%0ANama%20penerima%3A%20%0AFoto%3A%20(nanti%20saya%20kirim)%0APesan%3A%20"
+         target="_blank" class="btn-order">🎉 Pesan Sekarang</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ CTA BOTTOM ═══ -->
+<section id="cta-bottom">
+  <h2>Yuk, Bikin Orang<br/>Tersayangmu Terharu! 🥹</h2>
+  <p>Jangan kasih hadiah biasa. Kasih pengalaman yang nggak terlupakan seumur hidup.</p>
+  <a href="https://wa.me/6285282012758?text=Halo%20kak!%20Saya%20mau%20pesan%20website%20ucapan%20ulang%20tahun%20interaktif!%20🎉%0ANama%20penerima%3A%20%0APerintah%20tambahan%3A%20"
+     target="_blank" class="btn-wa-main" style="font-size:1.2rem; padding:18px 44px;">
+    <span>💬</span> Hubungi 085282012758
+  </a>
+  <div class="wa-number-tag"><span>📞</span> 0852-8201-2758</div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p>🎂 CIHUY Web · Jasa Website Ulang Tahun Interaktif</p>
+  <p style="margin-top:4px;">WhatsApp: <strong style="color:#2ef87a;">085282012758</strong> · Made with 💖</p>
+</footer>
+
+<!-- ═══ WA FLOAT BTN ═══ -->
+<a href="https://wa.me/6285282012758?text=Halo%20kak!%20Saya%20mau%20pesan%20website%20ucapan%20ulang%20tahun!%20🎉"
+   target="_blank" class="wa-float" title="Chat WhatsApp">💬</a>
+
+<script>
+// ── Background Particle System ──
+(function(){
+  const c = document.getElementById("bg");
+  const ctx = c.getContext("2d");
+  let W, H, P = [];
+  const cols = ["233,30,140","0,229,255","170,50,220","255,107,194"];
+
+  function resize(){ W = c.width = innerWidth; H = c.height = innerHeight; }
+  function mkP(){
+    return {
+      x: Math.random()*W, y: Math.random()*H,
+      r: Math.random()*2+0.4,
+      dx:(Math.random()-.5)*.4, dy:-(Math.random()*.5+.15),
+      a: Math.random()*.5+.2,
+      col: cols[Math.floor(Math.random()*cols.length)]
+    };
+  }
+  function init(){ P=[]; for(let i=0;i<100;i++) P.push(mkP()); }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const g=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,Math.max(W,H));
+    g.addColorStop(0,"#110020"); g.addColorStop(1,"#060010");
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    P.forEach((p,i)=>{
+      p.x+=p.dx; p.y+=p.dy;
+      if(p.y<-5){P[i]=mkP();P[i].y=H+5;}
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${p.col},${p.a})`; ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener("resize",()=>{resize();init();});
+  resize(); init(); draw();
+})();
+
+// ── Floating emoji background ──
+(function(){
+  const cont = document.getElementById("floaters");
+  const emojis = ["🎂","🎉","🎊","🎈","⭐","✨","💖","🌟","🎁","💫"];
+  for(let i=0;i<14;i++){
+    const el = document.createElement("div");
+    el.className="fl";
+    el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.cssText = `
+      left:${Math.random()*100}%;
+      animation-duration:${6+Math.random()*8}s;
+      animation-delay:${Math.random()*6}s;
+      font-size:${1+Math.random()*1.5}rem;
+    `;
+    cont.appendChild(el);
+  }
+})();
+
+// ── Scroll reveal ──
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.style.opacity="1";
+      e.target.style.transform="translateY(0)";
+    }
+  });
+},{threshold:0.1});
+
+document.querySelectorAll(".feat-card,.price-card,.step").forEach(el=>{
+  el.style.cssText += "opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease;";
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
