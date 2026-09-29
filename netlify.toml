@@ -1,0 +1,9 @@
+﻿# Netlify Configuration for CIHUY Birthday Website
+[build]
+  publish = "."
+  command = ""
+
+[[redirects]]
+  from = "/*"
+  to   = "/index.html"
+  status = 200
